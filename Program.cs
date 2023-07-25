@@ -41,7 +41,10 @@ builder.Services.AddDbContext<Weapon_DataContext>(opt =>
 });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "SweetP API", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -49,7 +52,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "SweetP API V1");
+        //c.RoutePrefix = string.Empty; // 루트 경로에서 Swagger UI 접근을 원할 경우 주석 해제
+
+        // 추가적인 구성: Swagger UI를 사용하기 위해 필요한 인증 설정을 제거
+    });
 }
 
 app.UseHttpsRedirection();
