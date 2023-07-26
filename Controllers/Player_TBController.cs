@@ -50,6 +50,24 @@ namespace sweetp_server.Controllers
             return player;
         }
 
+        // GET: api/Players/address/lepo
+        [HttpGet("address/{address}")]
+        public async Task<ActionResult<Player_TB>> GetPlayerIDWithAddress(string address)
+        {
+            if (_context.player_tb == null)
+            {
+                return NotFound();
+            }
+            var player = await _context.player_tb.FirstOrDefaultAsync(e => e.player_address == address);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return player;
+        }
+
         // PUT: api/Players/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
