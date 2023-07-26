@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,23 @@ namespace sweetp_server.Controllers
             var weapon_TB = await _context.weapon_tb.FindAsync(id);
 
             if (weapon_TB == null)
+            {
+                return NotFound();
+            }
+
+            return weapon_TB;
+        }
+
+        // GET: api/Weapon_TB/5
+        [HttpGet("owner/{id}")]
+        public async Task<ActionResult<List<Weapon_TB>>> GetWeaponWithOwnerID(int id)
+        {
+            if (_context.weapon_tb == null)
+            {
+                return NotFound();
+            }
+            var weapon_TB = await _context.Set<Weapon_TB>().Where(e => e.weapon_owner == id).ToListAsync();
+            if (weapon_TB.Count == 0)
             {
                 return NotFound();
             }
