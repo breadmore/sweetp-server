@@ -60,7 +60,6 @@ if (app.Environment.IsDevelopment())
         // 추가적인 구성: Swagger UI를 사용하기 위해 필요한 인증 설정을 제거
     });
 
-    app.MapGet("/", () => "Hello");
 }
 
 app.UseHttpsRedirection();
