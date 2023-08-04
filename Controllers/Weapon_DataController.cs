@@ -101,7 +101,7 @@ namespace sweetp_server.Controllers
         }
 
         [HttpPut("weapon/{id}")]
-        public async Task<IActionResult> PutWeapon_Data_Sale(int id, int weapon_Sale)
+        public async Task<IActionResult> PutWeapon_Data_Sale(int id, int weapon_sale)
         {
             var weapon_Data = await _context.weapon_data.FindAsync(id);
 
@@ -110,7 +110,7 @@ namespace sweetp_server.Controllers
                 return NotFound();
             }
 
-            weapon_Data.weapon_sale = weapon_Sale;
+            weapon_Data.weapon_sale = weapon_sale;
 
             try
             {
