@@ -55,7 +55,8 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+/*
+ * if (app.Environment.IsDevelopment())
 {
     app.UseSwagger(options =>
     {
@@ -69,6 +70,19 @@ if (app.Environment.IsDevelopment())
         // 추가적인 구성: Swagger UI를 사용하기 위해 필요한 인증 설정을 제거
     });
 }
+ */
+
+app.UseSwagger(options =>
+{
+    options.SerializeAsV2 = true;
+});
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SweetP API V1");
+    //c.RoutePrefix = string.Empty; // 루트 경로에서 Swagger UI 접근을 원할 경우 주석 해제
+
+    // 추가적인 구성: Swagger UI를 사용하기 위해 필요한 인증 설정을 제거
+});
 
 app.UseHttpsRedirection();
 
