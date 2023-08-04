@@ -6,5 +6,8 @@ namespace sweetp_server.Models
     {
         [Key]
         public int weapon_id { get; set; }
+        public int weapon_cost { get; set; }
+
+        public int weapon_owner { get; set; }
     }
 }
