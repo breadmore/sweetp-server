@@ -100,6 +100,36 @@ namespace sweetp_server.Controllers
             return NoContent();
         }
 
+        [HttpPut("weapon/{id}")]
+        public async Task<IActionResult> PutWeapon_Data_Sale(int id, int weapon_Sale)
+        {
+            var weapon_Data = await _context.weapon_data.FindAsync(id);
+
+            if (weapon_Data == null)
+            {
+                return NotFound();
+            }
+
+            weapon_Data.weapon_sale = weapon_Sale;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!Weapon_DataExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
         // POST: api/Weapon_Data
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

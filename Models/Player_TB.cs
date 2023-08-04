@@ -6,7 +6,7 @@ namespace sweetp_server.Models
     {
         [Key]
         public int player_id { get; set; }
-
+        public string? player_name { get; set; }
         public string? player_address { get; set; }
     }
 }

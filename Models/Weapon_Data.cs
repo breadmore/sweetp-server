@@ -13,5 +13,7 @@ namespace sweetp_server.Models
         public int weapon_element { get; set; }
         public int weapon_durability { get; set; }
         public int weapon_upgrade { get; set; }
+
+        public int weapon_sale { get; set; }
     }
 }

@@ -40,6 +40,12 @@ builder.Services.AddDbContext<Weapon_DataContext>(opt =>
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+builder.Services.AddDbContext<Weapon_MarketContext>(opt =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -62,7 +68,6 @@ if (app.Environment.IsDevelopment())
 
         // 추가적인 구성: Swagger UI를 사용하기 위해 필요한 인증 설정을 제거
     });
-
 }
 
 app.UseHttpsRedirection();
