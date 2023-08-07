@@ -69,6 +69,19 @@ namespace sweetp_server.Controllers
             return weapon_Data;
         }
 
+        [HttpGet("weapon/sale")]
+        public async Task<ActionResult<IEnumerable<Weapon_Data>>> GetWeaponWithSale()
+        {
+            if (_context.weapon_data == null)
+            {
+                return NotFound();
+            }
+            var weaponsOnSale = await _context.weapon_data
+       .Where(weapon => weapon.weapon_sale == 1)
+       .ToListAsync();
+
+            return weaponsOnSale;
+        }
         // PUT: api/Weapon_Data/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -130,6 +143,7 @@ namespace sweetp_server.Controllers
 
             return NoContent();
         }
+
         // POST: api/Weapon_Data
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
