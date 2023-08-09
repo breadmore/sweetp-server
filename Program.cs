@@ -46,6 +46,11 @@ builder.Services.AddDbContext<Weapon_MarketContext>(opt =>
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+builder.Services.AddDbContext<Player_ScrollContext>(opt =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
